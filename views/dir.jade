@@ -1,0 +1,36 @@
+extends layout
+
+append scripts
+  script(type='text/javascript', src='/javascripts/jquery.js')
+  script(type='text/javascript', src='/javascripts/jquery.timeago.js')
+  script(type='text/javascript', src='/javascripts/dir.js')
+
+block header
+  h1= pathname
+  p Directory view (#[a(href='/') index] / #[a(href='..') parent])
+
+block index
+  div#dirs
+    h2 Dirs
+    if dirs.length
+      ul
+        each item in dirs
+          li
+            //- trailing space below on purpose!
+            | #[a(href=url_prefix + item.name) #{item.name}], 
+            | #[abbr.timeago(title=item.lastmod.iso) #{item.lastmod.date}] 
+            | #[a.wget(href="javascript:0;") wget]
+    else
+      p No subdirectories.
+  div#files
+    h2 Files
+    if files.length
+      ul
+        each item in files
+          li
+            //- trailing space below on purpose!
+            | #[a(href=url_prefix + item.name) #{item.name}], 
+            | #[abbr.timeago(title=item.lastmod.iso) #{item.lastmod.date}] 
+            | #[a.wget(href="javascript:0;") wget]
+    else
+      p No files.

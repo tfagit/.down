@@ -1,0 +1,15 @@
+doctype html
+
+html
+    head
+        title= title
+        block stylesheets
+            link(rel='stylesheet', href='/stylesheets/style.css')
+        block scripts
+
+    body
+        div#wrapper
+            header
+                block header
+            div#index
+                block index

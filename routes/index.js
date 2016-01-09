@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('*', function(req, res, next) {
-    var pathname = url.parse(req.url).pathname;
+    var pathname = decodeURI(url.parse(req.url).pathname);
     var dir_path = path.join(physical_path, pathname);
     dir.getDirContents(dir_path, function(err, contents){
         if (err) {

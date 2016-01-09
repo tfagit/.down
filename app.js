@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nconf = require('nconf');
-
 // nconf - Hierarchical config manager
 nconf.argv().env().file({ file: './config.json' });
+
+var dir = require('./lib/dir.js')
+
 
 var routes = require('./routes/index');
 // var users = require('./routes/users');
@@ -47,7 +49,8 @@ if (nconf.get('env') === 'development') {
         res.render('error', {
             title: err.message,
             message: err.message,
-            error: err
+            error: err,
+            rel: dir.relUrl
         });
     });
 }
@@ -57,9 +60,10 @@ if (nconf.get('env') === 'development') {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
-        title: err.message,
+        title: "Something wrong happened.",
         message: err.message,
-        error: {}
+        error: {},
+        rel: dir.relUrl
     });
 });
 

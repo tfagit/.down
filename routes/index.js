@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var dir = require('../lib/dir.js');
 var url = require('url');
-
 var nconf = require('nconf');
+var dir = require('../lib/dir.js');
 
 var index_dir = nconf.get('index_dir');
 var physical_path = path.join(__dirname, "..", index_dir);
@@ -24,7 +23,8 @@ router.get('/', function(req, res, next) {
             title: '.down',
             files: contents.files,
             dirs: contents.dirs,
-            url_prefix: ''
+            url_prefix: '',
+            rel: dir.relUrl
         });
     });
 });
@@ -44,7 +44,8 @@ router.get('*', function(req, res, next) {
             title: pathname + ' - .down',
             files: contents.files,
             dirs: contents.dirs,
-            url_prefix: ''
+            url_prefix: '',
+            rel: dir.relUrl
         });
     });
 });

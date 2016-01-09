@@ -1,10 +1,10 @@
 extends layout
 
 append scripts
-  script(type='text/javascript', src='/javascripts/jquery.js')
-  script(type='text/javascript', src='/javascripts/jquery.timeago.js')
-  script(type='text/javascript', src='/javascripts/clipboard.min.js')
-  script(type='text/javascript', src='/javascripts/dir.js')
+  script(type='text/javascript', src=rel('/javascripts/jquery.js'))
+  script(type='text/javascript', src=rel('/javascripts/jquery.timeago.js'))
+  script(type='text/javascript', src=rel('/javascripts/clipboard.min.js'))
+  script(type='text/javascript', src=rel('/javascripts/dir.js'))
 
 block header
   h1= title

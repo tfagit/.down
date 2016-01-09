@@ -11,22 +11,22 @@ block header
   p Directory view (#[a(href='/') index] / #[a(href='..') parent])
 
 block index
-  div#dirs
+  div#dirs.index-container
     h2 Dirs
     if dirs.length
-      ul
+      ul.index
         each item in dirs
           li
             //- trailing space below on purpose!
             | #[a(href=url_prefix + item.name) #{item.name}], 
             | #[abbr.timeago(title=item.lastmod.iso) #{item.lastmod.date}] 
-            | (#[button.dl-button.clip-copy(data-clipboard-text=item.dl.wget) wget])
+            | (#[button.dl-button.clip-copy(data-clipboard-text=item.dl.wget_dir) wget])
     else
       p No subdirectories.
-  div#files
+  div#files.index-container
     h2 Files
     if files.length
-      ul
+      ul.index
         each item in files
           li
             //- trailing space below on purpose!

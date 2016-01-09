@@ -1,0 +1,9 @@
+{
+    "apps": [{
+        "name": "pontodown",
+        "script": "bin/www",
+        "env": {
+            "PORT": 8009
+        }
+    }]
+}

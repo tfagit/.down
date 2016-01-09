@@ -3,10 +3,11 @@ extends layout
 append scripts
   script(type='text/javascript', src='/javascripts/jquery.js')
   script(type='text/javascript', src='/javascripts/jquery.timeago.js')
+  script(type='text/javascript', src='/javascripts/clipboard.min.js')
   script(type='text/javascript', src='/javascripts/dir.js')
 
 block header
-  h1= pathname
+  h1= title
   p Directory view (#[a(href='/') index] / #[a(href='..') parent])
 
 block index
@@ -19,7 +20,7 @@ block index
             //- trailing space below on purpose!
             | #[a(href=url_prefix + item.name) #{item.name}], 
             | #[abbr.timeago(title=item.lastmod.iso) #{item.lastmod.date}] 
-            | #[a.wget(href="javascript:0;") wget]
+            | (#[button.dl-button.clip-copy(data-clipboard-text=item.dl.wget) wget])
     else
       p No subdirectories.
   div#files
@@ -31,6 +32,6 @@ block index
             //- trailing space below on purpose!
             | #[a(href=url_prefix + item.name) #{item.name}], 
             | #[abbr.timeago(title=item.lastmod.iso) #{item.lastmod.date}] 
-            | #[a.wget(href="javascript:0;") wget]
+            | (#[button.dl-button.clip-copy(data-clipboard-text=item.dl.wget) wget])
     else
       p No files.

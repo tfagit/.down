@@ -14,10 +14,12 @@ router.use(express.static(physical_path));
 router.get('/', function(req, res, next) {
     dir.getDirContents(physical_path, function(err, contents){
         if (err) {
-            var err = new Error("There's no such directory, 404.");
+            var err = new Error("File directory doesn't exist, 404. (Alert the admin!)");
             err.status = 404;
             return next(err);
         }
+        var url_with_host = path.join("http://" + req.headers.host, req.url);
+        dir.addCommandsToContents(contents, url_with_host);
         res.render('index', {
             title: '.down',
             files: contents.files,
@@ -36,6 +38,8 @@ router.get('*', function(req, res, next) {
             err.status = 404;
             return next(err);
         }
+        var url_with_host = path.join("http://" + req.headers.host, req.url);
+        dir.addCommandsToContents(contents, url_with_host);
         res.render('dir', {
             title: pathname + ' - .down',
             files: contents.files,

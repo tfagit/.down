@@ -10,7 +10,7 @@ var nconf = require('nconf');
 nconf.argv().env().file({ file: './config.json' });
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+// var users = require('./routes/users');
 
 
 var app = express();

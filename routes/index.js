@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
             err.status = 404;
             return next(err);
         }
-        var url_with_host = "http://" + req.headers.host + req.url;
+        var url_with_host = "http://" + req.headers.host + dir.relUrl(req.url);
         dir.addCommandsToContents(contents, url_with_host);
         res.render('index', {
             title: '.down',
@@ -38,7 +38,7 @@ router.get('*', function(req, res, next) {
             err.status = 404;
             return next(err);
         }
-        var url_with_host = path.join("http://" + req.headers.host, req.url);
+        var url_with_host = "http://" + req.headers.host + dir.relUrl(req.url);
         dir.addCommandsToContents(contents, url_with_host);
         res.render('dir', {
             title: pathname + ' - .down',
